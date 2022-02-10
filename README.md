@@ -34,5 +34,5 @@ bash build-latest.sh
 
 # All subsequent runs
 ```
-docker start oxce -u "$(id -u):$(id -g)"
+docker start oxce
 ```
