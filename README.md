@@ -17,7 +17,7 @@ docker-compose build
   ```
   mkdir UFO TFTD config user
   ```
-- Copy assets into UFO or TFTD, or both (see https://www.ufopaedia.org/index.php/Installing_(OpenXcom)#All_platforms)
+- Copy assets into `UFO/` or `TFTD/`, or both (see https://www.ufopaedia.org/index.php/Installing_(OpenXcom)#All_platforms)
 - Create the container
   ```bash
   docker run -it \
