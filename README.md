@@ -18,7 +18,7 @@ bash build-latest.sh
 - Copy assets into `UFO/` or `TFTD/`, or both (see https://www.ufopaedia.org/index.php/Installing_(OpenXcom)#All_platforms)
 - Create the container
   ```bash
-  docker run -it \
+  docker run \
    --name oxce \
    -u "$(id -u):$(id -g)" \
    -e DISPLAY \
