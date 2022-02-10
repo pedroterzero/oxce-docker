@@ -1,14 +1,12 @@
-# Get latest
+# Get latest version of OpenXcom Extended
 ```bash
 bash get-latest.sh
 ```
 
 # Build image
 
-**Do not forget to update version number in `docker-compose.yml`**
-
 ```bash
-docker-compose build
+bash build-latest.sh
 ```
 
 # Initial setup
@@ -31,7 +29,7 @@ docker-compose build
    -v "${PWD}/UFO:/app/UFO" \
    -v "${PWD}/TFTD:/app/TFTD" \
    -v "${PWD}/user:/app/user" \
-   oxce:7.5.3
+   oxce:latest
   ```
 
 # All subsequent runs
