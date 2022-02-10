@@ -12,6 +12,8 @@ if [ "$VERSION" = "" ]; then
     exit 1
 fi
 
+echo "$VERSION" >> VERSION
+
 sed -i "s/image: oxce:[0-9.]*/image: oxce:$VERSION/" docker-compose.yml
 docker-compose build
 docker tag oxce:"$VERSION" oxce:latest

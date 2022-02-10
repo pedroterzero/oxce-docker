@@ -9,6 +9,15 @@ bash get-latest.sh
 bash build-latest.sh
 ```
 
+# Publish to docker hub
+```
+docker tag oxce:"$(cat VERSION)" pedroterzero/oxce:"$(cat VERSION)"
+docker tag oxce:"$(cat VERSION)" pedroterzero/oxce:latest
+docker login
+docker push pedroterzero/oxce:"$(cat VERSION)"
+docker push pedroterzero/oxce:latest
+```
+
 # Initial setup
 - Create a new empty directory and cd into it
 - Create required folders
