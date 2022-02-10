@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  oxce:
+    image: oxce:7.5.3
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    working_dir: /app
