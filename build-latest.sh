@@ -14,7 +14,6 @@ fi
 
 echo "$VERSION" >> VERSION
 
-sed -i "s/image: oxce:[0-9.]*/image: oxce:$VERSION/" docker-compose.yml
 docker pull ubuntu:18.04
 docker-compose build
-docker tag oxce:"$VERSION" oxce:latest
+docker tag pedroterzero/oxce:latest pedroterzero/oxce:"$VERSION"

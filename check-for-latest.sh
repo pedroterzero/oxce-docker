@@ -26,5 +26,6 @@ if [ "$LATEST" = "$VERSION" ]; then
 else
     echo "Latest version is $LATEST, VERSION file says $VERSION, update available"
     echo '::set-output name=DO_UPDATE::1'
+    echo "::set-output name=NEW_VERSION::$LATEST"
 fi
 
