@@ -1,7 +1,7 @@
 on:
-  push
-#  schedule:
-#    - cron: '0 * * * *'
+#  push
+ schedule:
+   - cron: '0 */3 * * *'
 
 jobs:
   check_for_update:
