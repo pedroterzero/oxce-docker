@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   oxce:
-    image: oxce:7.5.3
+    image: pedroterzero/oxce
     build:
       context: .
       dockerfile: ./Dockerfile
