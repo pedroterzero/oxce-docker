@@ -11,9 +11,12 @@ jobs:
       NEW_VERSION: ${{ steps.check_for_update.outputs.NEW_VERSION }}
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
+    -
+      name: Checkout code
       uses: actions/checkout@v2
-    - run: bash check-for-latest.sh
+    -
+      name: Check for a newer version
+      run: bash check-for-latest.sh
       id: check_for_update
     # - if: ${{ steps.check_for_update.outputs.DO_UPDATE == 1 }}
     #   run: echo UPDATING!
@@ -22,20 +25,29 @@ jobs:
     needs: [check_for_update]
     if: needs.check_for_update.outputs.DO_UPDATE == 1
     steps:
-    - name: Checkout code
+    -
+      name: Checkout code
       uses: actions/checkout@v2
-    - run: bash get-latest.sh
-    - run: bash build-latest.sh
+    -
+      name: Get the latest version and unpack
+      run: bash get-latest.sh
+    -
+      name: Build the container image
+      run: bash build-latest.sh
     -
       name: Login to Docker Hub
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-    - run: |
-       docker push pedroterzero/oxce:${{ needs.check_for_update.outputs.NEW_VERSION }}
-       docker push pedroterzero/oxce:latest
-    - run: |
+    -
+      name: Push it to docker hub
+      run: |
+        docker push pedroterzero/oxce:${{ needs.check_for_update.outputs.NEW_VERSION }}
+        docker push pedroterzero/oxce:latest
+    -
+      name: Bump the version number in the repo
+      run: |
         echo ${{ needs.check_for_update.outputs.NEW_VERSION }} > VERSION
         git add VERSION
         git config user.email "pedro@terzero"
