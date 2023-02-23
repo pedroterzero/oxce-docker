@@ -29,10 +29,11 @@ docker push pedroterzero/oxce:latest
    --name oxce \
    -e "MAP_UID=$(id -u)" \
    -e "MAP_GID=$(id -g)" \
+   -e "PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native" \
    -e DISPLAY \
    -v "/tmp/.X11-unix:/tmp/.X11-unix:ro" \
-   -v "/run/user/$(id -u)/pulse:/run/user/$(id -u)/pulse:ro" \
-   -v "/etc/machine-id:/etc/machine-id:ro" \
+   -v "${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native:ro" \
+   -v "${HOME}/.config/pulse/cookie:/home/oxce/.config/pulse/cookie:ro" \
    -v "${PWD}/config:/home/oxce/.config/openxcom" \
    -v "${PWD}/UFO:/app/UFO" \
    -v "${PWD}/TFTD:/app/TFTD" \
