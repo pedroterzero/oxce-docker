@@ -27,4 +27,4 @@ jobs:
       name: Push it to docker hub
       run: |
         docker tag pedroterzero/oxce:latest pedroterzero/oxce:${{ github.ref_name }}
-        docker pedroterzero/oxce:${{ github.ref_name }}
+        docker push pedroterzero/oxce:${{ github.ref_name }}
