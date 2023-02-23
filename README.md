@@ -27,11 +27,12 @@ docker push pedroterzero/oxce:latest
   ```bash
   docker run \
    --name oxce \
-   -u "$(id -u):$(id -g)" \
+   -e "MAP_UID=$(id -u)" \
+   -e "MAP_GID=$(id -g)" \
    -e DISPLAY \
-   -v "/tmp/.X11-unix:/tmp/.X11-unix" \
-   -v "/run/user/$(id -u)/pulse:/run/user/1000/pulse" \
-   -v "/etc/machine-id:/etc/machine-id" \
+   -v "/tmp/.X11-unix:/tmp/.X11-unix:ro" \
+   -v "/run/user/$(id -u)/pulse:/run/user/$(id -u)/pulse:ro" \
+   -v "/etc/machine-id:/etc/machine-id:ro" \
    -v "${PWD}/config:/home/oxce/.config/openxcom" \
    -v "${PWD}/UFO:/app/UFO" \
    -v "${PWD}/TFTD:/app/TFTD" \
