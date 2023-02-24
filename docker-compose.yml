@@ -6,4 +6,13 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    working_dir: /app
+      target: regular
+    # working_dir: /app
+
+  oxce-rootless:
+    image: pedroterzero/oxce:rootless
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: rootless
+    # working_dir: /app

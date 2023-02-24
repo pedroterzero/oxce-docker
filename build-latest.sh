@@ -15,6 +15,7 @@ fi
 echo "$VERSION" >> VERSION
 
 # pull is really only needed locally
-docker compose build --pull --target=regular --progress=plain
+docker compose build --pull --progress=plain
 docker tag pedroterzero/oxce:latest pedroterzero/oxce:"$VERSION"
-docker compose build --pull --target=rootless --progress=plain -t pedroterzero/oxce:rootless
+docker tag pedroterzero/oxce:rootless pedroterzero/oxce:"$VERSION"-rootless
+# docker compose build --pull --progress=plain -t pedroterzero/oxce:rootless
