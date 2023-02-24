@@ -28,5 +28,5 @@ jobs:
       run: |
         docker tag pedroterzero/oxce:latest pedroterzero/oxce:${{ github.ref_name }}
         docker push pedroterzero/oxce:${{ github.ref_name }}
-        docker tag pedroterzero/oxce:latest pedroterzero/oxce:${{ github.ref_name }}-rootless
+        docker tag pedroterzero/oxce:rootless pedroterzero/oxce:${{ github.ref_name }}-rootless
         docker push pedroterzero/oxce:${{ github.ref_name }}-rootless
