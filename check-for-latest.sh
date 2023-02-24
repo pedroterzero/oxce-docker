@@ -21,7 +21,7 @@ fi
 
 LATEST=$(echo "$LATEST_FULL" | cut -d'-' -f2)
 
-if [ "$LATEST" = "$VERSION" ]; then
+if [ "$LATEST" = "$VERSION" ] && [ "$GITHUB_EVENT_NAME" != "workflow_dispatch" ]; then
     echo "Latest version is $LATEST, VERSION file says $VERSION, no update"
 else
     echo "Latest version is $LATEST, VERSION file says $VERSION, update available"
