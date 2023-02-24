@@ -8,8 +8,6 @@ COPY oxce /app
 
 WORKDIR /app
 
-CMD ["./OpenXcomEx"]
-
 FROM base AS regular
 
 RUN useradd -m oxce
@@ -20,8 +18,12 @@ RUN chown -R oxce.oxce /home/oxce/.config /app
 
 COPY docker-entrypoint.sh /
 
+CMD ["./OpenXcomEx"]
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 FROM base AS rootless
 
 RUN mkdir -p /root/.config
+
+CMD ["./OpenXcomEx"]
