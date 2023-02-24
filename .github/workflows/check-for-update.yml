@@ -50,6 +50,7 @@ jobs:
         docker push pedroterzero/oxce:rootless
     -
       name: Bump the version number in the repo
+      if: ${{ github.event_name != 'workflow_dispatch' }}
       run: |
         echo ${{ needs.check_for_update.outputs.NEW_VERSION }} > VERSION
         git add VERSION
