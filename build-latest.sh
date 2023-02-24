@@ -18,5 +18,3 @@ echo "$VERSION" >> VERSION
 docker compose build --pull --progress=plain
 docker tag pedroterzero/oxce:latest pedroterzero/oxce:"$VERSION"
 docker tag pedroterzero/oxce:rootless pedroterzero/oxce:"$VERSION"-rootless
-docker images
-# docker compose build --pull --progress=plain -t pedroterzero/oxce:rootless
