@@ -24,4 +24,4 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 
 FROM base AS rootless
 
-RUN mkdir -p /home/oxce/.config
+RUN mkdir -p /root/.config
