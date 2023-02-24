@@ -6,4 +6,17 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    working_dir: /app
+      target: regular
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+      cache_from:
+        - pedroterzero/oxce
+    # working_dir: /app
+
+  oxce-rootless:
+    image: pedroterzero/oxce:rootless
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: rootless
+    # working_dir: /app

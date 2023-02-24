@@ -15,6 +15,6 @@ fi
 echo "$VERSION" >> VERSION
 
 # pull is really only needed locally
-docker pull ubuntu:18.04
-docker-compose build
+docker compose build --pull --progress=plain
 docker tag pedroterzero/oxce:latest pedroterzero/oxce:"$VERSION"
+docker tag pedroterzero/oxce:rootless pedroterzero/oxce:"$VERSION"-rootless

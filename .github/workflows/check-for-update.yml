@@ -2,6 +2,7 @@ on:
 #  push
  schedule:
    - cron: '0 */3 * * *'
+ workflow_dispatch:
 
 jobs:
   check_for_update:
@@ -45,6 +46,8 @@ jobs:
       run: |
         docker push pedroterzero/oxce:${{ needs.check_for_update.outputs.NEW_VERSION }}
         docker push pedroterzero/oxce:latest
+        docker push pedroterzero/oxce:${{ needs.check_for_update.outputs.NEW_VERSION }}-rootless
+        docker push pedroterzero/oxce:rootless
     -
       name: Bump the version number in the repo
       run: |
