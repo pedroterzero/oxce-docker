@@ -19,8 +19,8 @@ jobs:
       name: Check for a newer version
       run: bash check-for-latest.sh
       id: check_for_update
-    - if: ${{ steps.check_for_update.outputs.DO_UPDATE == 1 }}
-      run: echo UPDATING!
+    # - if: ${{ steps.check_for_update.outputs.DO_UPDATE == 1 }}
+    #   run: echo UPDATING!
   get_and_build_update:
     runs-on: ubuntu-latest
     needs: [check_for_update]
