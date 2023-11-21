@@ -1,0 +1,5 @@
+#!/bin/bash
+
+APPIMAGE="$(dirname "$0")"
+
+exec ${APPIMAGE}/usr/bin/OpenXcomEx -data "${APPIMAGE}" -user "$PWD" "$@"

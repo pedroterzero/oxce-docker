@@ -5,26 +5,26 @@ on:
  workflow_dispatch:
 
 jobs:
-  check_for_update:
-    # output whether we want an update to be done
-    outputs:
-      DO_UPDATE: ${{ steps.check_for_update.outputs.DO_UPDATE }}
-      NEW_VERSION: ${{ steps.check_for_update.outputs.NEW_VERSION }}
-    runs-on: ubuntu-latest
-    steps:
-    -
-      name: Checkout code
-      uses: actions/checkout@v2
-    -
-      name: Check for a newer version
-      run: bash check-for-latest.sh
-      id: check_for_update
+  # check_for_update:
+  #   # output whether we want an update to be done
+  #   outputs:
+  #     DO_UPDATE: ${{ steps.check_for_update.outputs.DO_UPDATE }}
+  #     NEW_VERSION: ${{ steps.check_for_update.outputs.NEW_VERSION }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   -
+  #     name: Checkout code
+  #     uses: actions/checkout@v2
+  #   -
+  #     name: Check for a newer version
+  #     run: bash check-for-latest.sh
+  #     id: check_for_update
     # - if: ${{ steps.check_for_update.outputs.DO_UPDATE == 1 }}
     #   run: echo UPDATING!
   get_and_build_update:
     runs-on: ubuntu-latest
-    needs: [check_for_update]
-    if: needs.check_for_update.outputs.DO_UPDATE == 1
+    # needs: [check_for_update]
+    # if: needs.check_for_update.outputs.DO_UPDATE == 1
     steps:
     -
       name: Checkout code
@@ -33,28 +33,31 @@ jobs:
       name: Get the latest version and unpack
       run: bash get-latest.sh
     -
-      name: Build the container image
-      run: bash build-latest.sh
-    -
-      name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-    -
-      name: Push it to docker hub
-      run: |
-        docker push pedroterzero/oxce:${{ needs.check_for_update.outputs.NEW_VERSION }}
-        docker push pedroterzero/oxce:latest
-        docker push pedroterzero/oxce:${{ needs.check_for_update.outputs.NEW_VERSION }}-rootless
-        docker push pedroterzero/oxce:rootless
-    -
-      name: Bump the version number in the repo
-      if: ${{ github.event_name != 'workflow_dispatch' }}
-      run: |
-        echo ${{ needs.check_for_update.outputs.NEW_VERSION }} > VERSION
-        git add VERSION
-        git config user.email "pedro@terzero"
-        git config user.name "pedroterzero bot"
-        git commit -m "Bumping version to ${{ needs.check_for_update.outputs.NEW_VERSION }}"
-        git push
+      name: Build app image
+      run: bash build-latest-appimage.sh
+    # -
+    #   name: Build the container image
+    #   run: bash build-latest.sh
+    # -
+    #   name: Login to Docker Hub
+    #   uses: docker/login-action@v1
+    #   with:
+    #     username: ${{ secrets.DOCKER_HUB_USERNAME }}
+    #     password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+    # -
+    #   name: Push it to docker hub
+    #   run: |
+    #     docker push pedroterzero/oxce:${{ needs.check_for_update.outputs.NEW_VERSION }}
+    #     docker push pedroterzero/oxce:latest
+    #     docker push pedroterzero/oxce:${{ needs.check_for_update.outputs.NEW_VERSION }}-rootless
+    #     docker push pedroterzero/oxce:rootless
+    # -
+    #   name: Bump the version number in the repo
+    #   if: ${{ github.event_name != 'workflow_dispatch' }}
+    #   run: |
+    #     echo ${{ needs.check_for_update.outputs.NEW_VERSION }} > VERSION
+    #     git add VERSION
+    #     git config user.email "pedro@terzero"
+    #     git config user.name "pedroterzero bot"
+    #     git commit -m "Bumping version to ${{ needs.check_for_update.outputs.NEW_VERSION }}"
+    #     git push

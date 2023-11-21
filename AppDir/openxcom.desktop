@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=OpenXCOM Extended
+Comment=Extended version of the OpenXCOM game
+Exec=OpenXcomEx
+Icon=openxcom
+Path=/
+Terminal=false
+Categories=Game;
