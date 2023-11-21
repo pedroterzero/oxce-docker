@@ -27,4 +27,4 @@ RUN apt-get update && \
     file \
     && rm -rf /var/lib/apt/lists/*
 
-COPY build-appimage-in-container.sh /app
+# COPY build.sh /app
