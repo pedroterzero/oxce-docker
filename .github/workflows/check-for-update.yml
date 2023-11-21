@@ -33,6 +33,31 @@ jobs:
       name: Get the latest version and unpack
       run: bash get-latest.sh
     -
+      name: Build app image
+      run: bash build-latest-appimage.sh
+    -
+      name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: v${{ needs.check_for_update.outputs.NEW_VERSION }}
+        release_name: Release v${{ needs.check_for_update.outputs.NEW_VERSION }}
+        draft: false
+        prerelease: false
+    -
+      name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+        asset_path: ./out/OpenXCOM_Extended-x86_64.AppImage
+        asset_name: OpenXCOM_Extended-v${{ needs.check_for_update.outputs.NEW_VERSION }}-x86_64.AppImage
+        asset_content_type: application/octet-stream
+    -
       name: Build the container image
       run: bash build-latest.sh
     -
