@@ -20,6 +20,5 @@ docker run \
  --rm \
  -v "$PWD:/app/vol":ro \
  -v "$PWD/out:/app/out" \
- -it \
  linuxdeploy \
  bash -c "vol/build-appimage-in-container.sh"
